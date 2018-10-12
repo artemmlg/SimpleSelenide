@@ -1,5 +1,4 @@
-import io.codearte.jfairy.Fairy;
-import io.codearte.jfairy.producer.person.Person;
+import com.codeborne.selenide.Condition;
 import org.junit.Test;
 
 public class SpotifySignUpTest extends BaseTest {
@@ -17,5 +16,10 @@ public class SpotifySignUpTest extends BaseTest {
             .selectGender("Male")
             .clickShareMyDataCheckbox()
             .clickSignUpButton();
+        for (SpotifySignUpPage.Errors errorHandler : SpotifySignUpPage.Errors.values()) {
+            spotifySignUpPage.getErrors(errorHandler.getError())
+                    .shouldBe(Condition.visible)
+                    .shouldHave(Condition.text(errorHandler.getError()));
+        }
     }
 }

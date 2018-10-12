@@ -1,3 +1,4 @@
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.selected;
@@ -75,7 +76,40 @@ class SpotifySignUpPage {
         return this;
     }
 
-    public void clickSignUpButton(){
+    public void clickSignUpButton() {
         $(signUpButton).shouldBe(visible).click();
+    }
+
+    /**
+     * Errors Handling
+     */
+
+    public SelenideElement getErrors(String text) {
+        String getErrorWithText = (".//*[@class=\'has-error\' and text()=\"%s\"]");
+        return $x(String.format(getErrorWithText, text));
+    }
+
+    /**
+     * Error Texts
+     */
+
+    public enum Errors{
+        EMAIL_ALREADY_TAKEN("We're sorry, that email is taken."),
+        EMAIL_NOT_MATCH("Email address doesn't match."),
+        SHORT_PASSWORD("Your password is too short."),
+        EMPTY_DISPLAY_NAME("What should we call you?"),
+        INVALID_DAY_OF_DOB("Please enter a valid day of the month."),
+        INVALID_YEAR_OF_DOB("Sorry, but you don't meet Spotify's age requirements."),
+        MISSING_CAPTCHA("Please confirm you're not a robot.");
+
+        private String error;
+
+        Errors(String error) {
+            this.error = error;
+        }
+
+        public String getError() {
+            return error;
+        }
     }
 }
