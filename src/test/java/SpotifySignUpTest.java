@@ -3,10 +3,9 @@ import io.codearte.jfairy.producer.person.Person;
 import org.junit.Test;
 
 public class SpotifySignUpTest extends BaseTest {
-    private Person person = Fairy.create().person();
     private SpotifySignUpPage spotifySignUpPage = new SpotifySignUpPage();
 
-    @Test public void typeInvalidYear() throws InterruptedException {
+    @Test public void testNegativeValuesRegistration(){
     spotifySignUpPage.openPage()
             .typeEmail("asd@asd.com")
             .typeConfirmEmail("sad@sad.com")
@@ -15,7 +14,8 @@ public class SpotifySignUpTest extends BaseTest {
             .selectMonthForDoB("December")
             .typeDayForDoB("99")
             .typeYearForDoB("9999")
-            .selectGender("Male");
-    Thread.sleep(2000);
+            .selectGender("Male")
+            .clickShareMyDataCheckbox()
+            .clickSignUpButton();
     }
 }

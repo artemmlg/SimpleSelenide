@@ -1,8 +1,8 @@
 import org.openqa.selenium.By;
 
+import static com.codeborne.selenide.Condition.selected;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 class SpotifySignUpPage {
     //using CSS selectors for practice
@@ -13,7 +13,7 @@ class SpotifySignUpPage {
     private By dateOfBirthMonthDropDown = By.cssSelector("select#register-dob-month");
     private By dateOfBirthDay = By.cssSelector("input#register-dob-day");
     private By dateOfBirthYear = By.cssSelector("input#register-dob-year");
-    private By gender = By.cssSelector("li#li-gender");
+    private By gender = By.cssSelector("li#li-gender input");
     private By acceptRules = By.cssSelector("input#register-thirdparty");
     private By signUpButton = By.cssSelector("a#register-button-email-submit");
 
@@ -58,7 +58,24 @@ class SpotifySignUpPage {
     }
 
     public SpotifySignUpPage selectGender(String gender) {
-        $(this.gender).shouldBe(visible).selectRadio(gender.toLowerCase());
+        if (!selected.apply(getElement(this.gender))) {
+            $(this.gender).shouldBe(visible).selectRadio(gender.toLowerCase()).click();
+        } else {
+            System.out.println("Element: " + this.gender.toString() + "is already selected!");
+        }
         return this;
+    }
+
+    public SpotifySignUpPage clickShareMyDataCheckbox() {
+        if (!selected.apply(getElement(acceptRules))) {
+            $(acceptRules).shouldBe(visible).click();
+        } else {
+            System.out.println("Element: " + acceptRules.toString() + "is already selected!");
+        }
+        return this;
+    }
+
+    public void clickSignUpButton(){
+        $(signUpButton).shouldBe(visible).click();
     }
 }
