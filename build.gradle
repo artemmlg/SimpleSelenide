@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'com.qa2a'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.codeborne:selenide:4.14.2'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'io.codearte.jfairy:jfairy:0.5.9'
+}
+
