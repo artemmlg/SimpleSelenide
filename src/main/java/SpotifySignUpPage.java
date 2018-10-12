@@ -67,8 +67,8 @@ class SpotifySignUpPage {
         return this;
     }
 
-    public SpotifySignUpPage clickShareMyDataCheckbox() {
-        if (!selected.apply(getElement(acceptRules))) {
+    public SpotifySignUpPage clickShareMyDataCheckbox(boolean check) {
+        if (!selected.apply(getElement(acceptRules)) & check) {
             $(acceptRules).shouldBe(visible).click();
         } else {
             System.out.println("Element: " + acceptRules.toString() + "is already selected!");
@@ -93,7 +93,7 @@ class SpotifySignUpPage {
      * Error Texts
      */
 
-    public enum Errors{
+    public enum Errors {
         EMAIL_ALREADY_TAKEN("We're sorry, that email is taken."),
         EMAIL_NOT_MATCH("Email address doesn't match."),
         SHORT_PASSWORD("Your password is too short."),
