@@ -1,3 +1,5 @@
+package pages;
+
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
@@ -5,7 +7,8 @@ import static com.codeborne.selenide.Condition.selected;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-class SpotifySignUpPage {
+
+public class SpotifySignUpPage {
     //using CSS selectors for practice
     private By emailField = By.cssSelector("input#register-email");
     private By emailConfirmField = By.cssSelector("input#register-confirm-email");
@@ -18,7 +21,7 @@ class SpotifySignUpPage {
     private By acceptRules = By.cssSelector("input#register-thirdparty");
     private By signUpButton = By.cssSelector("a#register-button-email-submit");
 
-    SpotifySignUpPage openPage() {
+    public SpotifySignUpPage openPage() {
         open("/int/signup/");
         return this;
     }
@@ -85,7 +88,7 @@ class SpotifySignUpPage {
      */
 
     public SelenideElement getErrors(String text) {
-        String getErrorWithText = (".//*[@class=\'has-error\' and text()=\"%s\"]");
+        String getErrorWithText = ".//*[@class=\'has-error\' and text()=\"%s\"]";
         return $x(String.format(getErrorWithText, text));
     }
 

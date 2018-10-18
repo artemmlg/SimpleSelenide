@@ -1,4 +1,5 @@
 import org.junit.Test;
+import pages.SpotifySignUpPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -19,6 +20,7 @@ public class SpotifySignUpTest extends BaseTest {
                 .selectGender("Male")
                 .clickShareMyDataCheckbox(true)
                 .clickSignUpButton();
+        //Assertions
         for (SpotifySignUpPage.Errors errorHandler : SpotifySignUpPage.Errors.values()) {
             spotifySignUpPage.getErrors(errorHandler.getError())
                     .shouldBe(visible)
